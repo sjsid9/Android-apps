@@ -36,21 +36,45 @@ public class SuperHeroAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         LayoutInflater li = LayoutInflater.from(ctx);
-        View inflatedView=li.inflate(R.layout.layout_row,parent,false);
+        View inflatedView;
+        ViewHolder viewHolder;
+
+        if(convertView == null){
+            inflatedView = li.inflate(R.layout.layout_row,parent,false);
+            viewHolder = new ViewHolder();
+            viewHolder.initialize(inflatedView);
+//            viewHolder.name = inflatedView.findViewById(R.id.SuperHeroName);
+//            viewHolder.universe = inflatedView.findViewById(R.id.SuperHeroUniverse);
+//            viewHolder.power = inflatedView.findViewById(R.id.SuperHeroPower);
+            inflatedView.setTag(viewHolder);
+        }else{
+            inflatedView = convertView;
+            viewHolder = (ViewHolder) inflatedView.getTag();
+        }
 
         SuperHero currentHero = arrayList.get(position);
 
-        TextView name=inflatedView.findViewById(R.id.SuperHeroName);
-        TextView universe=inflatedView.findViewById(R.id.SuperHeroUniverse);
-        TextView power=inflatedView.findViewById(R.id.SuperHeroPower);
 
-        name.setText(currentHero.getName());
-        universe.setText(currentHero.getUniverse());
-        power.setText(currentHero.getPower());
+
+        viewHolder.name.setText(currentHero.getName());
+        viewHolder.universe.setText(currentHero.getUniverse());
+        viewHolder.power.setText(currentHero.getPower());
 
         return inflatedView;
 
     }
+
+
+    class ViewHolder{
+        TextView name,universe,power;
+
+        void initialize(View view){
+            name = view.findViewById(R.id.SuperHeroName);
+            universe = view.findViewById(R.id.SuperHeroUniverse);
+            power = view.findViewById(R.id.SuperHeroPower);
+        }
+
+    }
+
 }
