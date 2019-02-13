@@ -1,5 +1,6 @@
 package com.infisoln.siddhant.recyclerview;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -47,8 +48,17 @@ public class SuperHeroAdapter extends RecyclerView.Adapter<SuperHeroAdapter.Supe
     class SuperHeroHolder extends RecyclerView.ViewHolder {
         TextView name, universe, power;
 
-        public SuperHeroHolder(@NonNull View view) {
+        public SuperHeroHolder(@NonNull final View view) {
             super(view);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SuperHero currentSuperhero = superHeroes.get(getAdapterPosition());
+                    Intent intent = new Intent(view.getContext(),DetailActivity.class);
+                    intent.putExtra("Name",currentSuperhero.getSuperHeroName());
+                    view.getContext().startActivity(intent);
+                }
+            });
             name = view.findViewById(R.id.tvName);
             universe = view.findViewById(R.id.tvUniverse);
             power = view.findViewById(R.id.tvPOwer);
