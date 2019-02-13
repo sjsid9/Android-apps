@@ -18,7 +18,8 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.PlanetHold
 
     private ArrayList<Planet> planetArrayList;
     Context ctx;
-    PlanetAdapter(ArrayList<Planet> planetArrayList,Context ctx) {
+
+    PlanetAdapter(ArrayList<Planet> planetArrayList, Context ctx) {
         this.planetArrayList = planetArrayList;
         this.ctx = ctx;
     }
@@ -28,7 +29,7 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.PlanetHold
     public PlanetHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 //        ctx = viewGroup.getContext();
         LayoutInflater li = LayoutInflater.from(viewGroup.getContext());
-        View view = li.inflate(R.layout.layout_row,viewGroup,false);
+        View view = li.inflate(R.layout.layout_row, viewGroup, false);
         return new PlanetHolder(view);
     }
 
@@ -46,7 +47,7 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.PlanetHold
         return planetArrayList.size();
     }
 
-    class PlanetHolder extends RecyclerView.ViewHolder{
+    class PlanetHolder extends RecyclerView.ViewHolder {
 
         TextView planetName;
         ImageView planetImage;
@@ -58,15 +59,15 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.PlanetHold
                 @Override
                 public void onClick(View v) {
                     Planet currentPlanet = planetArrayList.get(getAdapterPosition());
-                    Intent i = new Intent(ctx,PlanetDetailActivity.class);
-                    i.putExtra("PlanetName",currentPlanet.getPlanetName());
-                    i.putExtra("Description",currentPlanet.getPlanetDescription());
+                    Intent i = new Intent(ctx, PlanetDetailActivity.class);
+                    i.putExtra("PlanetName", currentPlanet.getPlanetName());
+                    i.putExtra("Description", currentPlanet.getPlanetDescription());
                     ctx.startActivity(i);
                 }
             });
 
-            planetName=itemView.findViewById(R.id.tvPlanetName);
-            planetImage=itemView.findViewById(R.id.ivPlanetImage);
+            planetName = itemView.findViewById(R.id.tvPlanetName);
+            planetImage = itemView.findViewById(R.id.ivPlanetImage);
         }
 
     }

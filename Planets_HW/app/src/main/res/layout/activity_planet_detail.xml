@@ -1,29 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/galaxyimage"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.infisoln.siddhant.planets_hw.DetailActivityFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent" />
 
-    <TextView
-        android:textColor="#ffffff"
-        android:id="@+id/pname"
-        android:textSize="38sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
-    <TextView
-        android:textColor="#ffffff"
-        android:textSize="25sp"
-        android:id="@+id/pdes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-</ScrollView>
+</LinearLayout>
