@@ -2,6 +2,8 @@ package com.infisoln.siddhant.recyclerview;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +16,11 @@ public class SuperHeroAdapter extends RecyclerView.Adapter<SuperHeroAdapter.Supe
 
 
     ArrayList<SuperHero> superHeroes;
+    AppCompatActivity appCompatActivity;
 
-    public SuperHeroAdapter(ArrayList<SuperHero> superHeroes) {
+    public SuperHeroAdapter(ArrayList<SuperHero> superHeroes, AppCompatActivity activity) {
         this.superHeroes = superHeroes;
+        this.appCompatActivity = activity;
     }
 
     View inflatedView;
@@ -54,9 +58,13 @@ public class SuperHeroAdapter extends RecyclerView.Adapter<SuperHeroAdapter.Supe
                 @Override
                 public void onClick(View v) {
                     SuperHero currentSuperhero = superHeroes.get(getAdapterPosition());
-                    Intent intent = new Intent(view.getContext(),DetailActivity.class);
-                    intent.putExtra("Name",currentSuperhero.getSuperHeroName());
-                    view.getContext().startActivity(intent);
+
+                    if (appCompatActivity.findViewById(R.id.container) == null) {
+                        startIntent(currentSuperhero.getSuperHeroName());
+                    } else {
+                        addFragment(currentSuperhero.getSuperHeroName());
+                    }
+
                 }
             });
             name = view.findViewById(R.id.tvName);
@@ -65,4 +73,20 @@ public class SuperHeroAdapter extends RecyclerView.Adapter<SuperHeroAdapter.Supe
         }
     }
 
+
+    void startIntent(String name) {
+        Intent intent = new Intent(appCompatActivity.getBaseContext(), DetailActivity.class);
+        intent.putExtra("Name", name);
+        appCompatActivity.getBaseContext().startActivity(intent);
+    }
+
+    void addFragment(String name) {
+
+        FragmentManager fm = appCompatActivity.getSupportFragmentManager();
+        fm.beginTransaction()
+                .replace(R.id.container, new DetailActivityFragment())
+                .add(R.id.container, new DetailActivityFragment(name))
+                .commit();
+
+    }
 }

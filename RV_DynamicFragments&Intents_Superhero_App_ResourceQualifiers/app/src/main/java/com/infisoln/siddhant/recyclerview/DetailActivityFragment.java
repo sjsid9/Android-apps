@@ -11,6 +11,15 @@ import android.widget.TextView;
 
 public class DetailActivityFragment extends Fragment {
 
+    String name;
+
+    public DetailActivityFragment() {
+    }
+
+    public DetailActivityFragment(String name) {
+        this.name = name;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +35,14 @@ public class DetailActivityFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TextView textView = view.findViewById(R.id.tvNameDetailAct);
-        String name = getActivity().getIntent().getStringExtra("Name");
-        textView.setText(name);
+
+        if (getActivity().getIntent().hasExtra("Name")) {
+            String name = getActivity().getIntent().getStringExtra("Name");
+            textView.setText(name);
+        } else {
+            textView.setText(name);
+        }
+
+
     }
 }
