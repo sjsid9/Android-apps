@@ -3,6 +3,8 @@ package com.infisoln.siddhant.planets_hw;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +20,12 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.PlanetHold
 
     private ArrayList<Planet> planetArrayList;
     Context ctx;
+    AppCompatActivity appCompatActivity;
 
-    PlanetAdapter(ArrayList<Planet> planetArrayList, Context ctx) {
+    PlanetAdapter(ArrayList<Planet> planetArrayList, Context ctx,AppCompatActivity activity) {
         this.planetArrayList = planetArrayList;
         this.ctx = ctx;
+        this.appCompatActivity = activity;
     }
 
     @NonNull
@@ -59,10 +63,13 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.PlanetHold
                 @Override
                 public void onClick(View v) {
                     Planet currentPlanet = planetArrayList.get(getAdapterPosition());
-                    Intent i = new Intent(ctx, PlanetDetailActivity.class);
-                    i.putExtra("PlanetName", currentPlanet.getPlanetName());
-                    i.putExtra("Description", currentPlanet.getPlanetDescription());
-                    ctx.startActivity(i);
+                    if(appCompatActivity.findViewById(R.id.container)==null){
+                        startIntent(currentPlanet.getPlanetName(),currentPlanet.getPlanetDescription());
+                    }else{
+                        addFragment(currentPlanet.getPlanetName(),currentPlanet.getPlanetDescription());
+                    }
+
+
                 }
             });
 
@@ -71,5 +78,21 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.PlanetHold
         }
 
     }
+
+    void startIntent(String name,String description){
+        Intent i = new Intent(ctx, PlanetDetailActivity.class);
+        i.putExtra("PlanetName", name);
+        i.putExtra("Description", description);
+        ctx.startActivity(i);
+    }
+
+    void addFragment(String name,String description){
+        FragmentManager fm = appCompatActivity.getSupportFragmentManager();
+        fm.beginTransaction()
+                .replace(R.id.container,new DetailActivityFragment(name,description))
+                .add(R.id.container,new DetailActivityFragment(name,description))
+                .commit();
+    }
+
 
 }
