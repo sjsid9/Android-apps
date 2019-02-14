@@ -20,6 +20,14 @@ public class FragmentB extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    public static FragmentB newInstance(String input) {
+        Bundle args = new Bundle();
+        args.putString("Name", input);
+        FragmentB fragment = new FragmentB();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
