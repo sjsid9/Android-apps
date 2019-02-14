@@ -21,9 +21,14 @@ public class MainActivity extends AppCompatActivity implements Commmunicator {
             intent.putExtra("Name", name);
             startActivity(intent);
         } else {
+            Bundle bundle = new Bundle();
+            bundle.putString("Name",name);
+            FragmentB fragmentB = new FragmentB();
+            fragmentB.setArguments(bundle);
+
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.container, new FragmentB(name))
+                    .replace(R.id.container, fragmentB)
                     .commit();
         }
     }

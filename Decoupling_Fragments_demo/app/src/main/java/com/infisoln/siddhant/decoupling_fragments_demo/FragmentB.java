@@ -15,13 +15,6 @@ public class FragmentB extends Fragment {
 
     String name;
 
-    public FragmentB() {
-    }
-
-    public FragmentB(String text) {
-        this.name = text;
-    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +35,8 @@ public class FragmentB extends Fragment {
             String name = intent.getStringExtra("Name");
             textView.setText(name);
         } else {
-            textView.setText(name);
+            Bundle bundle = getArguments();
+            textView.setText(bundle.getString("Name"));
         }
     }
 }
