@@ -22,7 +22,7 @@ public class FragmentA extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_a,container,false);
+        return inflater.inflate(R.layout.fragment_a, container, false);
     }
 
     @Override
@@ -36,18 +36,27 @@ public class FragmentA extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if(getActivity().findViewById(R.id.container)==null){
-                    Intent intent = new Intent(getActivity(),DetailActivity.class);
-                    intent.putExtra("Name",editText.getText().toString());
-                    startActivity(intent);
-                }else{
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                    fm.beginTransaction()
-                            .replace(R.id.container,new FragmentB(editText.getText().toString()))
-                            .commit();
-                }
+                Commmunicator commmunicator = (Commmunicator) getActivity();
+                commmunicator.setTextinDetailAct(editText.getText().toString());
+
+                // Fragment A is in main activity therefore when getActivity() method is called
+                // the activity returned is Main Activity
+                // Later when this fragment is used in another class then that activity class will give
+                //its object in getActivity() method and it will be typecasted into the communicator
+                // therefor when we call settextdetailact method it will call / make call to only
+                // that activity method only
 
 
+//                if(getActivity().findViewById(R.id.container)==null){
+//                    Intent intent = new Intent(getActivity(),DetailActivity.class);
+//                    intent.putExtra("Name",editText.getText().toString());
+//                    startActivity(intent);
+//                }else{
+//                    FragmentManager fm = getActivity().getSupportFragmentManager();
+//                    fm.beginTransaction()
+//                            .replace(R.id.container,new FragmentB(editText.getText().toString()))
+//                            .commit();
+//                }
             }
         });
 
