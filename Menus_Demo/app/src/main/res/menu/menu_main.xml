@@ -4,6 +4,7 @@
 
     <item
         android:id="@+id/action_about"
+        android:icon="@drawable/ic_about"
         android:orderInCategory="1"
         android:title="About" />
     <item
@@ -14,6 +15,7 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_refresh"
+        android:icon="@drawable/ic_refresh"
         android:orderInCategory="2"
         android:title="Refresh" />
 
@@ -24,10 +26,12 @@
     <item
         android:id="@+id/action_help"
         android:orderInCategory="4"
+        android:icon="@drawable/ic_help"
         android:title="Help"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_feedback"
+        android:icon="@drawable/ic_feedback"
         android:orderInCategory="5"
         android:title="Feedback" />
     <!--</menu>-->
