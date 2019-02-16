@@ -1,7 +1,7 @@
 package com.infisoln.siddhant.asynctask;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
@@ -17,9 +17,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                for(long i=0;i<1000000000000L;i++){
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (long i = 0; i < 1000000000000L; i++) {
 
-                }
+                        }
+                    }
+                }).start();
+
 
             }
         });
