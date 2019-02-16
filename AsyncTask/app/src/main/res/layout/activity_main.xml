@@ -23,6 +23,8 @@
         android:layout_height="wrap_content" />
 
     <TextView
+        android:textSize="25sp"
+        android:gravity="center"
         android:id="@+id/tvTest"
         android:layout_gravity="center"
         android:layout_width="match_parent"
