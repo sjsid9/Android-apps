@@ -23,7 +23,7 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
                 "isDone INTEGER );");
     }
 
-    public void insertNote(Note note) {
+    public Long insertNote(Note note) {
 
         ContentValues contentValues = new ContentValues();
 
@@ -34,7 +34,7 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
 
         long id = getWritableDatabase().insert("todo_table", null, contentValues);
 
-        return;
+        return id;
 
     }
 

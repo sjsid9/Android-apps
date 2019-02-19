@@ -5,6 +5,7 @@ public class Note {
     String title,content,timeStamp;
     int isDone,id;
 
+
     public Note(String title, String content, String timeStamp, int isDone) {
         this.title = title;
         this.content = content;
