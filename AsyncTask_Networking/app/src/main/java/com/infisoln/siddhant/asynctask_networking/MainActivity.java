@@ -23,13 +23,24 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             progressDialog = new ProgressDialog(MainActivity.this);
+            progressDialog.setTitle("Downloading");
+            progressDialog.setMessage("Fetching content");
+            progressDialog.setMax(100);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             progressDialog.show();
         }
 
         @Override
         protected String doInBackground(String... strings) {
             try {
-                Thread.sleep(3000);
+
+                while (progressDialog.getProgress() <= progressDialog.getMax()) {
+                    Thread.sleep(200);
+                    progressDialog.incrementProgressBy(1);
+                    if (progressDialog.getProgress() == progressDialog.getMax()) {
+                        progressDialog.dismiss();
+                    }
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -44,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            progressDialog.cancel();
+            progressDialog.dismiss();
         }
 
     }
