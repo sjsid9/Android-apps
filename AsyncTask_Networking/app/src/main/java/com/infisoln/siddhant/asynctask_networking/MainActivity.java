@@ -22,28 +22,28 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new ProgressDialog(MainActivity.this);
-            progressDialog.setTitle("Downloading");
-            progressDialog.setMessage("Fetching content");
-            progressDialog.setMax(100);
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            progressDialog.show();
+//            progressDialog = new ProgressDialog(MainActivity.this);
+//            progressDialog.setTitle("Downloading");
+//            progressDialog.setMessage("Fetching content");
+//            progressDialog.setMax(100);
+//            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+//            progressDialog.show();
         }
 
         @Override
         protected String doInBackground(String... strings) {
-            try {
-
-                while (progressDialog.getProgress() <= progressDialog.getMax()) {
-                    Thread.sleep(200);
-                    progressDialog.incrementProgressBy(1);
-                    if (progressDialog.getProgress() == progressDialog.getMax()) {
-                        progressDialog.dismiss();
-                    }
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//
+//                while (progressDialog.getProgress() <= progressDialog.getMax()) {
+//                    Thread.sleep(200);
+//                    progressDialog.incrementProgressBy(1);
+//                    if (progressDialog.getProgress() == progressDialog.getMax()) {
+//                        progressDialog.dismiss();
+//                    }
+//                }
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
             return null;
         }
 
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            progressDialog.dismiss();
+//            progressDialog.dismiss();
         }
 
     }
