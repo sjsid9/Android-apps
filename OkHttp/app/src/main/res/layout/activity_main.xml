@@ -22,7 +22,7 @@
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
                     android:id="@+id/etName"
-                    android:text="Enter Name"
+                    android:hint="Enter Name"
                     android:textSize="25sp"
                     android:layout_height="wrap_content" />
 

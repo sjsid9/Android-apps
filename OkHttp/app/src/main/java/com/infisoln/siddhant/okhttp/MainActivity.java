@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -18,6 +19,7 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity {
 
     TextView textView;
+    int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,20 @@ public class MainActivity extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                call.enqueue(this);
+
+//
+//                if (count < 3) {
+//                    count++;
+//                    call.enqueue(this);
+//                }
+
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "Error in Network Call" + "\n" + "Please Retry", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 e.printStackTrace();
             }
 
