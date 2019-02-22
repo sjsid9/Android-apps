@@ -3,20 +3,28 @@ package com.infisoln.siddhant.asynctask_networking;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
+
+    ArrayList<Item> responseArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,9 +96,46 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            TextView textView = findViewById(R.id.tvResult);
-            textView.setText(s);
+
+            responseArrayList = parseJson(s);
+            GithubAdapter githubAdapter = new GithubAdapter(responseArrayList);
+            RecyclerView recyclerView = findViewById(R.id.recyclerView);
+            recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+            recyclerView.setAdapter(githubAdapter);
+
         }
+
+    }
+
+    private ArrayList<Item> parseJson(String s) {
+
+        ArrayList<Item> itemArrayList = new ArrayList<>();
+
+        try {
+            JSONObject rootObject = new JSONObject(s);
+
+            JSONArray itemsArray = rootObject.getJSONArray("items");
+
+            for (int i = 0; i < itemsArray.length(); i++) {
+                JSONObject currentObject = itemsArray.getJSONObject(i);
+                String login = currentObject.getString("login");
+                String id = currentObject.getString("id");
+                String avatar_url = currentObject.getString("avatar_url");
+                String url = currentObject.getString("url");
+                String score = currentObject.getString("score");
+
+                Item item = new Item(login, id, avatar_url, url, score);
+                itemArrayList.add(item);
+
+            }
+
+            return itemArrayList;
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return itemArrayList;
 
     }
 
