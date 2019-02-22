@@ -45,6 +45,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList("KEY", responseArrayList);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        responseArrayList = savedInstanceState.getParcelableArrayList("KEY");
+        GithubAdapter githubAdapter = new GithubAdapter(responseArrayList);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        recyclerView.setAdapter(githubAdapter);
+    }
+
     class MyTask extends AsyncTask<String, Void, String> {
 
         @Override
