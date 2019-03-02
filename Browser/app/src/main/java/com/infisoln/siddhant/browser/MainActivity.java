@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         final WebView webView =findViewById(R.id.webView);
         webView.loadUrl("https://www.google.com");
+        webView.setWebViewClient(new WebViewClient());
         WebSettings webSettings =webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String url= editText.getText().toString();
                 Toast.makeText(MainActivity.this,url, Toast.LENGTH_SHORT).show();
-                webView.loadUrl("https://www."+url);
+                webView.loadUrl("https://"+url);
             }
         });
 
@@ -45,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
             Uri uri = intent.getData();
             webView.loadUrl(uri.toString());
         }
-
 
     }
 }
