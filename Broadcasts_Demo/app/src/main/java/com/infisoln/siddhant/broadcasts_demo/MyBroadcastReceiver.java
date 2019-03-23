@@ -21,6 +21,5 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
                 Toast.makeText(context, "Airplane Mode Toogled", Toast.LENGTH_SHORT).show();
                 break;
         }
-
     }
 }
