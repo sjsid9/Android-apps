@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CustomBroadcasts</string>
+    <string name="enter_the_message_here">Enter the message here!!</string>
+    <string name="send">Send</string>
+</resources>
