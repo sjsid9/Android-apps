@@ -1,6 +1,5 @@
 package com.infisoln.siddhant.roomdatabase_demo;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -10,21 +9,21 @@ import android.arch.persistence.room.Update;
 import java.util.List;
 
 @Dao
-public interface NotesDao {
+public interface UsersDao {
 
     @Insert
-    List<Long> insertNotes(Notes... notes);
+    void insertUser(User user);
 
     @Update
-    void updateNote(Notes note);
+    void updateUser(User user);
 
     @Delete
-    void deleteNote(Notes note);
+    void deleteUser(User user);
 
-    @Query("SELECT * FROM notesTable")
-    LiveData<List<Notes>> getAllNotes();
+    @Query(value = "SELECT * FROM user")
+    List<User> getAllUsers();
 
-    @Query("SELECT * FROM notesTable WHERE id = :id")
-    Notes getNoteById(Long id);
+    @Query(value = "SELECT * FROM user WHERE id = :id ")
+    User getUserById(Long id);
 
 }
